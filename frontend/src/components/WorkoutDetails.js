@@ -1,6 +1,7 @@
 import React from 'react'
 import { useWorkoutContext } from '../hooks/useWorkoutContext'
 import { useAuthContext } from '../hooks/useAuthContext';
+import { getApiUrl } from '../utils/apiConfig';
 const WorkoutDetails = ({ workout }) => {
   const { dispatch } = useWorkoutContext();
   const { user } = useAuthContext();
@@ -9,7 +10,7 @@ const WorkoutDetails = ({ workout }) => {
     if (!user) {
       return;
     }
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/workouts/${workout._id}`, {
+    const response = await fetch(`${getApiUrl()}/api/workouts/${workout._id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${user.token}`

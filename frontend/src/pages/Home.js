@@ -3,13 +3,14 @@ import WorkoutDetails from '../components/WorkoutDetails';
 import WorkoutForm from '../components/WorkoutForm';
 import {useWorkoutContext}  from  '../hooks/useWorkoutContext';
 import {useAuthContext}  from  '../hooks/useAuthContext';
+import { getApiUrl } from '../utils/apiConfig';
 const Home = () => {
     // const [workouts, setWorkouts] = useState(null);
     const {workouts , dispatch} = useWorkoutContext();
     const {user} = useAuthContext();
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/workouts`, {
+            const response = await fetch(`${getApiUrl()}/api/workouts`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
