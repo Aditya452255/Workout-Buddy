@@ -16,7 +16,16 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: function (origin, callback) {
+    // Allow requests from the frontend URL with or without trailing slash
+    const allowedOrigin = (process.env.FRONTEND_URL || 'http://localhost:3000').replace(/\/$/, '');
+    
+    if (!origin || origin.replace(/\/$/, '') === allowedOrigin || origin === 'http://localhost:3000') {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };
