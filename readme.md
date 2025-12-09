@@ -1,3 +1,4 @@
+Deployed link(https://workout-buddy-ten.vercel.app/)
 # MERN Full Stack Workout Tracker
 
 A full-stack workout tracking application built with the MERN stack (MongoDB, Express, React, Node.js). Users can sign up, log in, and manage their workout routines.
