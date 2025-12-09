@@ -20,7 +20,11 @@ const corsOptions = {
     // Allow requests from the frontend URL with or without trailing slash
     const allowedOrigin = (process.env.FRONTEND_URL || 'http://localhost:3000').replace(/\/$/, '');
     
-    if (!origin || origin.replace(/\/$/, '') === allowedOrigin || origin === 'http://localhost:3000') {
+    // Allow localhost, production URL, and all Vercel preview deployments
+    if (!origin || 
+        origin === 'http://localhost:3000' ||
+        origin.replace(/\/$/, '') === allowedOrigin ||
+        origin.includes('.vercel.app')) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
